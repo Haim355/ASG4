@@ -9,6 +9,9 @@ class Employee(object):
         self.name = name
         self.salary = salary
         self.branche = branche
+    def __str__(self):
+        return f"({self.id}, {self.name}, {self.salary},{self.branche})"
+
 
  
 class Supplier(object):
@@ -16,6 +19,8 @@ class Supplier(object):
         self.id = id
         self.name = name
         self.contact_information = contact_information
+    def __str__(self):
+        return f"({self.id},{self.name},{self.contact_information})"
 
 class Product(object):
     def __init__(self,id,description,price,quantity):
@@ -23,6 +28,8 @@ class Product(object):
         self.description = description
         self.price = price
         self.quantity = quantity
+    def __str__(self):
+        return f"({self.id},{self.description},{self.price},{self.quantity})"
 
 
 class Branche(object):
@@ -30,6 +37,8 @@ class Branche(object):
         self.id = id
         self.location = location
         self.number_of_employees = number_of_employees
+    def __str__(self):
+        return f"({self.id},{self.location},{self.number_of_employees})"
 
 
 class Activitie(object):
@@ -38,6 +47,9 @@ class Activitie(object):
         self.quantity=quantity
         self.activator_id = activator_id
         self.date =date
+
+    def __str__(self):
+        return f"({self.product_id},{self.quantity},{self.activator_id},{self.date})"
 
  
  
@@ -130,12 +142,10 @@ class Repository(object):
         LEFT JOIN suppliers AS s ON a.activator_id = s.id AND a.quantity > 0
         ORDER BY a.date;
         """
-
         results = self.execute_command(script)
 
         for row in results:
-            print(f"{row[0]} {row[1]} {row[2]} {row[3]} {row[4]}")
-
+            print(row)
 
 # singleton
 repo = Repository()
